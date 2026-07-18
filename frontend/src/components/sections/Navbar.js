@@ -43,7 +43,7 @@ export default function Navbar() {
           </a>
 
           {/* Desktop nav */}
-          <nav className="hidden lg:flex items-center gap-8">
+          <nav className="hidden lg:flex items-center gap-8" aria-label="Primary">
             {NAV.map((n) => (
               <a
                 key={n.label}

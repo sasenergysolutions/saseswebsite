@@ -33,9 +33,10 @@ export default function Hero() {
         <div className="absolute inset-0 kenburns">
           <img
             src={HERO_IMG}
-            alt="Rooftop solar installation"
+            alt="Premium rooftop solar panel installation by SAS Energy Solutions — Solar EPC in Devakottai, Tamil Nadu"
             className="h-full w-full object-cover"
             loading="eager"
+            fetchpriority="high"
           />
         </div>
         {/* Overlays */}

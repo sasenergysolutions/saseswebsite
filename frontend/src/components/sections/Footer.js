@@ -95,6 +95,7 @@ export default function Footer() {
           <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-xs text-white/50">
             <a href="#" className="hover:text-white transition-colors" data-testid="footer-privacy">Privacy Policy</a>
             <a href="#" className="hover:text-white transition-colors" data-testid="footer-terms">Terms &amp; Conditions</a>
+            <a href="#" className="hover:text-white transition-colors" data-testid="footer-disclaimer">Disclaimer</a>
           </div>
         </div>
       </div>

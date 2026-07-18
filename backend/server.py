@@ -1,13 +1,15 @@
-from fastapi import FastAPI, APIRouter, HTTPException
+from fastapi import FastAPI, APIRouter, HTTPException, Request
 from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
 import os
+import re
+import time
 import logging
 import httpx
 from pathlib import Path
-from pydantic import BaseModel, Field, EmailStr, ConfigDict
-from typing import List, Optional
+from pydantic import BaseModel, Field, EmailStr, ConfigDict, field_validator
+from typing import List, Optional, Dict
 import uuid
 from datetime import datetime, timezone
 
@@ -47,11 +49,28 @@ class ContactSubmission(BaseModel):
 
 
 class ContactCreate(BaseModel):
-    name: str
+    name: str = Field(..., min_length=2, max_length=100)
     email: EmailStr
-    phone: str
-    service: Optional[str] = None
-    message: str
+    phone: str = Field(..., min_length=7, max_length=20)
+    service: Optional[str] = Field(None, max_length=120)
+    message: str = Field(..., min_length=5, max_length=1500)
+
+    @field_validator("phone")
+    @classmethod
+    def valid_phone(cls, v: str) -> str:
+        if not re.match(r"^[+()\s\-\d]{7,20}$", v):
+            raise ValueError("Invalid phone number")
+        return v.strip()
+
+    @field_validator("name", "service", "message")
+    @classmethod
+    def strip_tags(cls, v):
+        if v is None:
+            return v
+        # Strip HTML tags and control chars — light sanitization
+        v = re.sub(r"<[^>]*>", "", v)
+        v = re.sub(r"[\x00-\x08\x0b\x0c\x0e-\x1f]", "", v)
+        return v.strip()
 
 
 class QuoteRequest(BaseModel):
@@ -74,6 +93,28 @@ class EMIInput(BaseModel):
     loan_amount: float
     interest_rate: float         # annual %
     tenure_years: float
+
+
+# Simple in-memory rate limiter (per-IP): max N requests per window
+_RATE: Dict[str, List[float]] = {}
+_RATE_WINDOW = 60 * 10  # 10 minutes
+_RATE_MAX = 5           # 5 submissions per window
+
+def _client_ip(request: Request) -> str:
+    fwd = request.headers.get("x-forwarded-for")
+    if fwd:
+        return fwd.split(",")[0].strip()
+    return request.client.host if request.client else "unknown"
+
+def _rate_check(ip: str) -> bool:
+    now = time.time()
+    hits = [t for t in _RATE.get(ip, []) if now - t < _RATE_WINDOW]
+    if len(hits) >= _RATE_MAX:
+        _RATE[ip] = hits
+        return False
+    hits.append(now)
+    _RATE[ip] = hits
+    return True
 
 
 # ------------- Helpers -------------
@@ -110,7 +151,10 @@ async def root():
 
 
 @api_router.post("/contact", response_model=ContactSubmission)
-async def create_contact(payload: ContactCreate):
+async def create_contact(payload: ContactCreate, request: Request):
+    ip = _client_ip(request)
+    if not _rate_check(ip):
+        raise HTTPException(status_code=429, detail="Too many submissions. Please try again later.")
     doc_obj = ContactSubmission(**payload.model_dump())
     doc = doc_obj.model_dump()
     await db.contact_submissions.insert_one(doc)

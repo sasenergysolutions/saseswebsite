@@ -18,29 +18,50 @@ const GoogleG = ({ className = "h-4 w-4" }) => (
 );
 
 export default function Contact() {
-  const [form, setForm] = useState({ name: "", phone: "", email: "", location: "", message: "" });
+  const [form, setForm] = useState({ name: "", phone: "", email: "", location: "", message: "", website: "" });
   const [busy, setBusy] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
+  const sanitize = (v) => String(v || "").replace(/<[^>]*>?/g, "").trim();
+  const isValidPhone = (v) => /^[+()\s\-\d]{7,20}$/.test(v);
+  const isValidEmail = (v) => !v || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+
   const submit = async (e) => {
     e.preventDefault();
+    // Honeypot (spam bot check): if hidden field is filled, silently succeed.
+    if (form.website) {
+      setSubmitted(true);
+      return;
+    }
     if (!form.name || !form.phone || !form.location || !form.message) {
       toast.error("Please fill in all required fields.");
+      return;
+    }
+    if (!isValidPhone(form.phone)) {
+      toast.error("Please enter a valid phone number.");
+      return;
+    }
+    if (!isValidEmail(form.email)) {
+      toast.error("Please enter a valid email address.");
+      return;
+    }
+    if (form.message.length < 5 || form.message.length > 1500) {
+      toast.error("Message should be 5–1500 characters.");
       return;
     }
     setBusy(true);
     try {
       const payload = {
-        name: form.name,
-        phone: form.phone,
-        email: form.email || "noreply@sasenergysolutions.example",
-        service: form.location, // reuse existing backend field to carry location
-        message: form.message,
+        name: sanitize(form.name).slice(0, 100),
+        phone: sanitize(form.phone).slice(0, 20),
+        email: form.email ? sanitize(form.email).slice(0, 120) : "noreply@sasenergysolutions.example",
+        service: sanitize(form.location).slice(0, 120),
+        message: sanitize(form.message).slice(0, 1500),
       };
       await axios.post(`${API}/contact`, payload);
       toast.success("Enquiry sent! Our team will reach out within 24 hours.");
       setSubmitted(true);
-      setForm({ name: "", phone: "", email: "", location: "", message: "" });
+      setForm({ name: "", phone: "", email: "", location: "", message: "", website: "" });
     } catch (err) {
       toast.error("Something went wrong. Please try WhatsApp instead.");
     } finally {
@@ -179,6 +200,17 @@ export default function Contact() {
             ) : (
               <>
                 <div className="mt-8 grid sm:grid-cols-2 gap-5">
+                  {/* Honeypot — invisible to real users, catches bots */}
+                  <div className="hidden" aria-hidden="true">
+                    <label>Website</label>
+                    <input
+                      type="text"
+                      tabIndex="-1"
+                      autoComplete="off"
+                      value={form.website}
+                      onChange={(e) => setForm({ ...form, website: e.target.value })}
+                    />
+                  </div>
                   <div>
                     <label className="text-xs font-semibold text-slate-500 uppercase tracking-widest">Full name *</label>
                     <input value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} required className="mt-2 w-full rounded-xl bg-white border border-slate-200 px-4 py-3 text-slate-900 focus:outline-none focus:border-[#0A66C2] transition-colors" data-testid="contact-name" />
