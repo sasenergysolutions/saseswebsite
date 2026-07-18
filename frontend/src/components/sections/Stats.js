@@ -1,14 +1,17 @@
 import { motion, useInView, animate } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 
+/**
+ * value === null → non-numeric display (uses `display` instead of counter)
+ */
 const STATS = [
-  { value: 500, suffix: "+", label: "Projects Completed", tone: "blue" },
-  { value: 10, suffix: "+", label: "Years of Experience", tone: "slate" },
-  { value: 100, suffix: "%", label: "Customer Satisfaction", tone: "green" },
+  { value: 2024, suffix: "", label: "Established · Solar EPC", tone: "blue", display: "Since 2024", asCounter: true, prefix: "Since " },
+  { value: 500, suffix: "+", label: "Projects Ready to Deliver", tone: "slate" },
+  { value: null, suffix: "", label: "Residential · Commercial · Industrial Solutions", tone: "green", display: "R · C · I" },
   { value: 25, suffix: " yrs", label: "Panel Performance Warranty", tone: "slate" },
 ];
 
-function Counter({ to, suffix, inView }) {
+function Counter({ to, suffix, prefix = "", inView }) {
   const [val, setVal] = useState(0);
   useEffect(() => {
     if (!inView) return;
@@ -21,6 +24,7 @@ function Counter({ to, suffix, inView }) {
   }, [inView, to]);
   return (
     <span>
+      {prefix && <span className="text-slate-400 font-light text-3xl md:text-4xl lg:text-5xl align-middle mr-2">{prefix}</span>}
       {Math.round(val)}
       <span className="text-slate-400 font-light">{suffix}</span>
     </span>
@@ -41,12 +45,17 @@ export default function Stats() {
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: i * 0.1, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
               className="flex flex-col"
+              data-testid={`stat-${i}`}
             >
               <div className="text-[11px] tracking-[0.24em] uppercase text-slate-500 font-semibold">
                 {String(i + 1).padStart(2, "0")}
               </div>
               <div className="mt-3 text-5xl md:text-6xl lg:text-7xl font-bold tracking-tighter text-slate-900 leading-none">
-                <Counter to={s.value} suffix={s.suffix} inView={inView} />
+                {s.value !== null ? (
+                  <Counter to={s.value} suffix={s.suffix} prefix={s.prefix} inView={inView} />
+                ) : (
+                  <span className="text-4xl md:text-5xl lg:text-6xl">{s.display}</span>
+                )}
               </div>
               <div className={`mt-4 text-sm md:text-base ${s.tone === "blue" ? "text-[#0A66C2]" : s.tone === "green" ? "text-[#16A34A]" : "text-slate-600"} font-medium`}>
                 {s.label}
