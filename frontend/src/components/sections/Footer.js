@@ -1,4 +1,4 @@
-import { Facebook, Instagram, Youtube, Linkedin, Sun, ArrowUpRight } from "lucide-react";
+import { Facebook, Instagram, Youtube, Linkedin, ArrowUpRight } from "lucide-react";
 import { SITE, NAV } from "@/lib/site";
 
 const SERVICES = ["Residential", "Commercial", "Industrial", "Hybrid", "Water Pump", "AMC"];
@@ -19,12 +19,14 @@ export default function Footer() {
 
         <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
           <div className="col-span-2 md:col-span-1">
-            <a href="#home" className="flex items-center gap-2.5">
-              <span className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-[#0A66C2] to-[#16A34A] text-white"><Sun className="h-5 w-5" /></span>
-              <span className="leading-tight">
-                <span className="block text-[15px] font-bold tracking-tight">SAS Energy Solutions</span>
-                <span className="block text-[9px] font-medium tracking-[0.22em] uppercase text-[#7CE39E]">Think Future · Get Benefits</span>
-              </span>
+            <a href="#home" className="inline-flex items-center gap-3">
+              <img
+                src="/logo.jpg"
+                alt="SAS Energy Solutions"
+                className="h-16 md:h-20 w-auto object-contain rounded-lg bg-white p-1 shadow-sm"
+                loading="lazy"
+              />
+              <span className="sr-only">SAS Energy Solutions</span>
             </a>
             <p className="mt-4 text-sm text-white/60 leading-relaxed max-w-xs">
               A Devakottai-based Solar EPC. Engineering-grade rooftop, commercial and

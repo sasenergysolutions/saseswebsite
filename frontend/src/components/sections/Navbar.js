@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Phone, MessageCircle, Menu, X, Sun } from "lucide-react";
+import { Phone, MessageCircle, Menu, X } from "lucide-react";
 import { NAV, SITE } from "@/lib/site";
 
 export default function Navbar() {
@@ -30,13 +30,13 @@ export default function Navbar() {
         <div className="mx-auto max-w-[1400px] px-6 lg:px-10 flex items-center justify-between h-[72px]">
           {/* Logo */}
           <a href="#home" className="flex items-center gap-2.5 group" data-testid="nav-logo">
-            <span className="relative inline-flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-[#0A66C2] to-[#16A34A] text-white shadow-glow-blue">
-              <Sun className="h-5 w-5" strokeWidth={2.4} />
-            </span>
-            <span className="leading-tight">
-              <span className={`block text-[15px] font-bold tracking-tight ${scrolled ? "text-slate-900" : "text-white"}`}>SAS Energy Solutions</span>
-              <span className={`block text-[9px] font-medium tracking-[0.22em] uppercase ${scrolled ? "text-[#16A34A]" : "text-[#7CE39E]"}`}>Think Future · Get Benefits</span>
-            </span>
+            <img
+              src="/logo.jpg"
+              alt="SAS Energy Solutions"
+              className="h-12 md:h-14 w-auto object-contain rounded-md bg-white p-0.5 shadow-sm"
+              loading="eager"
+            />
+            <span className="sr-only">SAS Energy Solutions — Think Future Get Benefits</span>
           </a>
 
           {/* Desktop nav */}
