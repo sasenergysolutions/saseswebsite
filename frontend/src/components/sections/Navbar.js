@@ -34,8 +34,8 @@ export default function Navbar() {
               <Sun className="h-5 w-5" strokeWidth={2.4} />
             </span>
             <span className="leading-tight">
-              <span className={`block text-[15px] font-bold tracking-tight ${scrolled ? "text-slate-900" : "text-white"}`}>SAS Energy</span>
-              <span className={`block text-[10px] font-medium tracking-[0.22em] uppercase ${scrolled ? "text-slate-500" : "text-white/70"}`}>Solutions</span>
+              <span className={`block text-[15px] font-bold tracking-tight ${scrolled ? "text-slate-900" : "text-white"}`}>SAS Energy Solutions</span>
+              <span className={`block text-[9px] font-medium tracking-[0.22em] uppercase ${scrolled ? "text-[#16A34A]" : "text-[#7CE39E]"}`}>Think Future · Get Benefits</span>
             </span>
           </a>
 

@@ -22,8 +22,8 @@ export default function Footer() {
             <a href="#home" className="flex items-center gap-2.5">
               <span className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-[#0A66C2] to-[#16A34A] text-white"><Sun className="h-5 w-5" /></span>
               <span className="leading-tight">
-                <span className="block text-[15px] font-bold tracking-tight">SAS Energy</span>
-                <span className="block text-[10px] font-medium tracking-[0.22em] text-white/60 uppercase">Solutions</span>
+                <span className="block text-[15px] font-bold tracking-tight">SAS Energy Solutions</span>
+                <span className="block text-[9px] font-medium tracking-[0.22em] uppercase text-[#7CE39E]">Think Future · Get Benefits</span>
               </span>
             </a>
             <p className="mt-4 text-sm text-white/60 leading-relaxed max-w-xs">
@@ -62,12 +62,19 @@ export default function Footer() {
           <div>
             <div className="text-[10px] tracking-[0.24em] uppercase font-semibold text-white/50 mb-4">Contact</div>
             <ul className="space-y-2.5 text-sm text-white/80">
-              <li>{SITE.phone}</li>
-              <li>{SITE.email}</li>
-              <li className="leading-relaxed">{SITE.address}</li>
+              <li><a href={`tel:${SITE.phoneRaw}`} className="hover:text-white transition-colors">{SITE.phone}</a></li>
+              <li><a href={`https://wa.me/${SITE.whatsapp}`} target="_blank" rel="noreferrer" className="hover:text-white transition-colors">WhatsApp · {SITE.whatsappDisplay}</a></li>
+              <li><a href={`mailto:${SITE.email}`} className="hover:text-white transition-colors break-all">{SITE.email}</a></li>
+              <li className="leading-relaxed pt-1">
+                {SITE.addressLines.map((l, i) => <span key={i} className="block">{l}</span>)}
+              </li>
+              <li className="leading-relaxed pt-2 text-white/60">
+                <span className="block">{SITE.hours.weekdays}</span>
+                <span className="block">{SITE.hours.sunday}</span>
+              </li>
             </ul>
-            <a href="#contact" className="mt-6 inline-flex items-center gap-2 rounded-full bg-white text-slate-900 px-5 py-2.5 text-xs font-semibold hover:bg-[#7CE39E] transition-colors">
-              Get Free Quote <ArrowUpRight className="h-3.5 w-3.5" />
+            <a href={SITE.googleMapsLink} target="_blank" rel="noreferrer" className="mt-6 inline-flex items-center gap-2 rounded-full bg-white text-slate-900 px-5 py-2.5 text-xs font-semibold hover:bg-[#7CE39E] transition-colors">
+              Get Directions <ArrowUpRight className="h-3.5 w-3.5" />
             </a>
           </div>
         </div>

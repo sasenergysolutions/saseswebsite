@@ -39,11 +39,11 @@ export default function FloatingActions() {
         <Phone className="h-5 w-5" />
       </a>
       <a
-        href={`https://wa.me/${SITE.whatsapp}`}
+        href={`https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent("Hi SAS Energy Solutions, I'd like a free site survey.")}`}
         target="_blank"
         rel="noreferrer"
         className="relative inline-flex h-12 w-12 md:h-14 md:w-14 items-center justify-center rounded-full bg-[#16A34A] text-white shadow-glow-green hover:scale-105 transition-transform"
-        aria-label="WhatsApp"
+        aria-label="Chat on WhatsApp"
         data-testid="fab-whatsapp"
       >
         <MessageCircle className="h-5 w-5" />

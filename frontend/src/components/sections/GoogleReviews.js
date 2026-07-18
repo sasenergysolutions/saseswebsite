@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Star } from "lucide-react";
+import { SITE } from "@/lib/site";
 
 const REVIEWS = [
   { name: "Ramesh K.",       initials: "RK", place: "Karaikudi", text: "From ₹4,800 bill to ₹120. SAS handled everything — subsidy, DISCOM, net-meter. Turnkey in the truest sense." },
@@ -57,7 +58,7 @@ export default function GoogleReviews() {
               </div>
             </div>
             <a
-              href="https://www.google.com/search?q=SAS+Energy+Solutions+Devakottai"
+              href={SITE.googleBusiness}
               target="_blank"
               rel="noreferrer"
               className="mt-6 inline-flex items-center gap-2 rounded-full bg-white border border-slate-200 px-4 py-2 text-xs font-semibold text-slate-800 hover:border-slate-900 transition-colors"

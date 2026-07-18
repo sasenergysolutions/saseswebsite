@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import axios from "axios";
 import { toast } from "sonner";
-import { Phone, Mail, MapPin, MessageCircle, Send } from "lucide-react";
+import { Phone, Mail, MapPin, MessageCircle, Send, Clock, ExternalLink } from "lucide-react";
 import { SITE } from "@/lib/site";
 
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
@@ -56,35 +56,64 @@ export default function Contact() {
             </p>
 
             <div className="mt-8 grid grid-cols-1 gap-3">
-              <a href={`tel:${SITE.phoneRaw}`} className="group flex items-center gap-4 rounded-2xl border border-slate-200 p-4 hover:border-[#0A66C2] transition-colors" data-testid="contact-phone">
+              <a href={`tel:${SITE.phoneRaw}`} className="group flex items-center gap-4 rounded-2xl border border-slate-200 p-4 hover:border-[#0A66C2] hover:-translate-y-0.5 transition-all" data-testid="contact-phone">
                 <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-slate-900 text-white"><Phone className="h-5 w-5" /></span>
                 <div><div className="text-[10px] tracking-[0.22em] uppercase font-semibold text-slate-500">Phone</div><div className="text-sm font-semibold text-slate-900">{SITE.phone}</div></div>
               </a>
-              <a href={`https://wa.me/${SITE.whatsapp}`} target="_blank" rel="noreferrer" className="group flex items-center gap-4 rounded-2xl border border-slate-200 p-4 hover:border-[#16A34A] transition-colors" data-testid="contact-whatsapp">
+              <a href={`https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent("Hi SAS Energy Solutions, I'd like a free site survey.")}`} target="_blank" rel="noreferrer" className="group flex items-center gap-4 rounded-2xl border border-slate-200 p-4 hover:border-[#16A34A] hover:-translate-y-0.5 transition-all" data-testid="contact-whatsapp">
                 <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-[#16A34A] text-white"><MessageCircle className="h-5 w-5" /></span>
-                <div><div className="text-[10px] tracking-[0.22em] uppercase font-semibold text-slate-500">WhatsApp</div><div className="text-sm font-semibold text-slate-900">Message us anytime</div></div>
+                <div><div className="text-[10px] tracking-[0.22em] uppercase font-semibold text-slate-500">WhatsApp</div><div className="text-sm font-semibold text-slate-900">{SITE.whatsappDisplay}</div></div>
               </a>
-              <a href={`mailto:${SITE.email}`} className="group flex items-center gap-4 rounded-2xl border border-slate-200 p-4 hover:border-[#0A66C2] transition-colors" data-testid="contact-email">
+              <a href={`mailto:${SITE.email}`} className="group flex items-center gap-4 rounded-2xl border border-slate-200 p-4 hover:border-[#0A66C2] hover:-translate-y-0.5 transition-all" data-testid="contact-email">
                 <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-[#0A66C2] text-white"><Mail className="h-5 w-5" /></span>
-                <div><div className="text-[10px] tracking-[0.22em] uppercase font-semibold text-slate-500">Email</div><div className="text-sm font-semibold text-slate-900">{SITE.email}</div></div>
+                <div className="min-w-0"><div className="text-[10px] tracking-[0.22em] uppercase font-semibold text-slate-500">Email</div><div className="text-sm font-semibold text-slate-900 break-all">{SITE.email}</div></div>
               </a>
-              <div className="flex items-start gap-4 rounded-2xl border border-slate-200 p-4">
-                <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-slate-100 text-slate-700"><MapPin className="h-5 w-5" /></span>
-                <div><div className="text-[10px] tracking-[0.22em] uppercase font-semibold text-slate-500">Office</div><div className="text-sm font-medium text-slate-900 leading-relaxed">{SITE.address}</div></div>
+              <a href={SITE.googleMapsLink} target="_blank" rel="noreferrer" className="group flex items-start gap-4 rounded-2xl border border-slate-200 p-4 hover:border-slate-900 hover:-translate-y-0.5 transition-all" data-testid="contact-office">
+                <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-slate-100 text-slate-700 group-hover:bg-slate-900 group-hover:text-white transition-colors"><MapPin className="h-5 w-5" /></span>
+                <div className="flex-1">
+                  <div className="text-[10px] tracking-[0.22em] uppercase font-semibold text-slate-500">Office</div>
+                  <div className="text-sm font-medium text-slate-900 leading-relaxed">
+                    {SITE.addressLines.map((l, i) => <span key={i} className="block">{l}</span>)}
+                  </div>
+                  <span className="mt-2 inline-flex items-center gap-1 text-xs font-semibold text-[#0A66C2] group-hover:text-[#16A34A] transition-colors">
+                    Open in Google Maps <ExternalLink className="h-3 w-3" />
+                  </span>
+                </div>
+              </a>
+              <div className="flex items-start gap-4 rounded-2xl border border-slate-200 p-4" data-testid="contact-hours">
+                <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-slate-100 text-slate-700"><Clock className="h-5 w-5" /></span>
+                <div>
+                  <div className="text-[10px] tracking-[0.22em] uppercase font-semibold text-slate-500">Working Hours</div>
+                  <div className="text-sm font-medium text-slate-900 leading-relaxed">
+                    <span className="block">{SITE.hours.weekdays}</span>
+                    <span className="block text-slate-500">{SITE.hours.sunday}</span>
+                  </div>
+                </div>
               </div>
             </div>
 
-            <div className="mt-6 overflow-hidden rounded-2xl border border-slate-200 aspect-[16/10]">
+            <a
+              href={SITE.googleMapsLink}
+              target="_blank"
+              rel="noreferrer"
+              className="mt-6 group block overflow-hidden rounded-2xl border border-slate-200 aspect-[16/10] relative"
+              data-testid="contact-map-link"
+            >
               <iframe
-                title="Office location"
-                src="https://maps.google.com/maps?q=Devakottai%2C%20Tamil%20Nadu&t=&z=13&ie=UTF8&iwloc=&output=embed"
+                title="SAS Energy Solutions office location"
+                src={SITE.mapEmbed}
                 width="100%"
                 height="100%"
                 loading="lazy"
-                style={{ border: 0 }}
+                style={{ border: 0, pointerEvents: "none" }}
                 referrerPolicy="no-referrer-when-downgrade"
               />
-            </div>
+              <div className="absolute inset-0 flex items-end justify-end p-4 pointer-events-none">
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-white/95 backdrop-blur px-3 py-1.5 text-xs font-semibold text-slate-900 shadow-ambient group-hover:bg-slate-900 group-hover:text-white transition-colors">
+                  <MapPin className="h-3.5 w-3.5" /> Get Directions
+                </span>
+              </div>
+            </a>
           </div>
 
           {/* Right: form */}
