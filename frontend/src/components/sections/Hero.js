@@ -70,7 +70,7 @@ export default function Hero() {
         >
           <span className="h-px w-10 bg-white/50" />
           <span className="text-[11px] tracking-[0.28em] uppercase text-white/85 font-semibold" data-testid="hero-eyebrow">
-            Solar EPC · Tamil Nadu · Since 2024
+            Solar EPC · devakottai · Since 2024
           </span>
         </motion.div>
 
