@@ -9,7 +9,6 @@ import Stats from "@/components/sections/Stats";
 import About from "@/components/sections/About";
 import Services from "@/components/sections/Services";
 import WhyUs from "@/components/sections/WhyUs";
-import Packages from "@/components/sections/Packages";
 import Brands from "@/components/sections/Brands";
 import Process from "@/components/sections/Process";
 import Gallery from "@/components/sections/Gallery";
@@ -64,7 +63,6 @@ function App() {
         <About />
         <Services />
         <WhyUs />
-        <Packages />
         <Brands />
         <Process />
         <Gallery />

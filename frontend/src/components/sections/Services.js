@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import {
   Home, Factory, Building2, GitMerge, Zap, BatteryCharging,
-  Droplets, Lightbulb, Car, Wrench, LifeBuoy, ArrowUpRight,
+  Droplets, Lightbulb, Wrench, LifeBuoy, ArrowUpRight,
 } from "lucide-react";
 
 const SERVICES = [
@@ -15,17 +15,15 @@ const SERVICES = [
     img: "https://images.pexels.com/photos/2800832/pexels-photo-2800832.jpeg" },
   { icon: Zap,             title: "On-Grid Solar",      desc: "Net-metered systems with instant ROI.",           size: "lg:col-span-4", tone: "green",
     img: "https://images.pexels.com/photos/35726122/pexels-photo-35726122.jpeg" },
-  { icon: BatteryCharging, title: "Off-Grid Solar",     desc: "Standalone plants for remote sites.",             size: "lg:col-span-5", tone: "slate",
+  { icon: BatteryCharging, title: "Off-Grid Solar",     desc: "Standalone plants for remote sites.",             size: "lg:col-span-4", tone: "slate",
     img: "https://images.pexels.com/photos/356036/pexels-photo-356036.jpeg" },
-  { icon: Droplets,        title: "Solar Water Pump",   desc: "PM-KUSUM approved agri pumps.",                   size: "lg:col-span-3", tone: "slate",
+  { icon: Droplets,        title: "Solar Water Pump",   desc: "Standalone solar pumps for agricultural irrigation.",             size: "lg:col-span-4", tone: "slate",
     img: "https://images.pexels.com/photos/9799708/pexels-photo-9799708.jpeg" },
-  { icon: Lightbulb,       title: "Solar Street Lights",desc: "All-in-one solar LED streetlights.",              size: "lg:col-span-3", tone: "slate",
+  { icon: Lightbulb,       title: "Solar Street Lights",desc: "All-in-one solar LED streetlights.",              size: "lg:col-span-4", tone: "slate",
     img: "https://images.pexels.com/photos/9875439/pexels-photo-9875439.jpeg" },
-  { icon: Car,             title: "Solar Carport",      desc: "Parking-integrated solar canopy.",                size: "lg:col-span-3", tone: "slate",
-    img: "https://images.pexels.com/photos/9875440/pexels-photo-9875440.jpeg" },
-  { icon: Wrench,          title: "Maintenance",        desc: "Cleaning, inspection, health checks.",            size: "lg:col-span-3", tone: "slate",
+  { icon: Wrench,          title: "Maintenance",        desc: "Cleaning, inspection, health checks.",            size: "lg:col-span-6", tone: "slate",
     img: "https://images.pexels.com/photos/30037320/pexels-photo-30037320.jpeg" },
-  { icon: LifeBuoy,        title: "AMC Plans",          desc: "Annual contracts with SLA-backed uptime.",        size: "lg:col-span-12", tone: "blue",
+  { icon: LifeBuoy,        title: "AMC Plans",          desc: "Annual contracts with SLA-backed uptime.",        size: "lg:col-span-6", tone: "blue",
     img: "https://images.pexels.com/photos/29923357/pexels-photo-29923357.jpeg" },
 ];
 
@@ -89,7 +87,7 @@ export default function Services() {
                   </div>
                   <div className="mt-6">
                     <div className="text-[10px] tracking-[0.24em] uppercase font-semibold text-slate-500 group-hover:text-white/80 transition-colors">
-                      {String(i + 1).padStart(2, "0")} / 11
+                      {String(i + 1).padStart(2, "0")} / {SERVICES.length}
                     </div>
                     <h3 className="mt-2 text-xl md:text-2xl font-semibold tracking-tight text-slate-900 group-hover:text-white transition-colors">
                       {s.title}

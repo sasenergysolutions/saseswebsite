@@ -28,7 +28,7 @@ export default function Gallery() {
             <div className="flex items-center gap-3 mb-4">
               <span className="h-px w-10 bg-slate-300" />
               <span className="text-[11px] tracking-[0.28em] uppercase text-slate-500 font-semibold">
-                Projects — Chapter 07
+                Gallery — Chapter 07
               </span>
             </div>
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tighter leading-[0.95] text-slate-900">

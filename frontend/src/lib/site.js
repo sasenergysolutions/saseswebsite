@@ -36,7 +36,6 @@ export const NAV = [
   { label: "Home", href: "#home" },
   { label: "About", href: "#about" },
   { label: "Services", href: "#services" },
-  { label: "Projects", href: "#gallery" },
   { label: "Products", href: "#brands" },
   { label: "Gallery", href: "#gallery" },
   { label: "FAQ", href: "#faq" },

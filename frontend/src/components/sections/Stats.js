@@ -6,7 +6,7 @@ import { useEffect, useRef, useState } from "react";
  */
 const STATS = [
   { value: 2024, suffix: "", label: "Established · Solar EPC", tone: "blue", display: "Since 2024", asCounter: true, prefix: "Since " },
-  { value: 500, suffix: "+", label: "Projects Ready to Deliver", tone: "slate" },
+  { value: 70, suffix: "+", label: "Successfully Completed Solar Projects", tone: "slate" },
   { value: null, suffix: "", label: "Residential · Commercial · Industrial Solutions", tone: "green", display: "R · C · I" },
   { value: 25, suffix: " yrs", label: "Panel Performance Warranty", tone: "slate" },
 ];
