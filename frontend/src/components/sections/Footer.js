@@ -4,7 +4,7 @@ import { SITE, NAV } from "@/lib/site";
 const QUICK_LINKS = [
   { label: "Services", href: "#services" },
   { label: "Products", href: "#brands" },
-  { label: "Gallery", href: "#gallery" },
+  { label: "Team", href: "#team" },
   { label: "About", href: "#about" },
   { label: "FAQ", href: "#faq" },
   { label: "Contact", href: "#contact" },

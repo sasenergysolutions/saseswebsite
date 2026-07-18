@@ -11,7 +11,7 @@ import Services from "@/components/sections/Services";
 import WhyUs from "@/components/sections/WhyUs";
 import Brands from "@/components/sections/Brands";
 import Process from "@/components/sections/Process";
-import Gallery from "@/components/sections/Gallery";
+import Team from "@/components/sections/Team";
 import Testimonials from "@/components/sections/Testimonials";
 import Calculators from "@/components/sections/Calculators";
 import FAQ from "@/components/sections/FAQ";
@@ -64,7 +64,7 @@ function App() {
         <WhyUs />
         <Brands />
         <Process />
-        <Gallery />
+        <Team />
         <Testimonials />
         <Calculators />
         <FAQ />
