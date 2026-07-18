@@ -6,13 +6,13 @@ const CHAPTERS = [
     n: "01",
     icon: Compass,
     title: "Our Mission",
-    body: "To accelerate Tamil Nadu's transition to clean energy by delivering engineering-grade solar systems that pay for themselves — reliably, transparently, and beautifully.",
+    body: "To provide reliable, affordable and high-quality solar energy solutions while promoting a greener future.",
   },
   {
     n: "02",
     icon: Target,
     title: "Our Vision",
-    body: "A future where every rooftop is a power plant. We build the infrastructure of that future — one meticulously commissioned installation at a time.",
+    body: "To become one of Tamil Nadu's most trusted Solar EPC companies through quality, innovation and customer satisfaction.",
   },
   {
     n: "03",
@@ -52,10 +52,15 @@ export default function About() {
               <span className="block font-editorial italic font-light text-[#0A66C2]">engineering discipline.</span>
             </motion.h2>
             <p className="mt-6 text-slate-600 text-base md:text-lg leading-relaxed max-w-md">
-              Headquartered in Devakottai, SAS Energy Solutions is a full-stack solar EPC
-              serving homes, factories and enterprises across Tamil Nadu. From the first
-              site survey to the twenty-fifth-year performance audit — the same team is
-              accountable.
+              SAS Energy Solutions is a trusted Solar EPC company based in Devakottai,
+              Tamil Nadu — delivering complete solar energy solutions for residential,
+              commercial, industrial and agricultural sectors.
+            </p>
+            <p className="mt-4 text-slate-600 text-base md:text-lg leading-relaxed max-w-md">
+              We specialize in Design, Supply, Installation, Testing, Commissioning and
+              Maintenance of high-quality solar power systems built with premium
+              components. Our mission is to help customers reduce electricity bills and
+              adopt clean, sustainable energy through reliable and affordable solar.
             </p>
             <div className="mt-8 inline-flex items-center gap-2 rounded-full bg-white border border-slate-200 px-4 py-2 text-sm text-slate-700">
               <Sparkles className="h-4 w-4 text-[#16A34A]" />
