@@ -29,14 +29,17 @@ export default function Navbar() {
       >
         <div className="mx-auto max-w-[1400px] px-6 lg:px-10 flex items-center justify-between h-[72px]">
           {/* Logo */}
-          <a href="#home" className="flex items-center gap-2.5 group" data-testid="nav-logo">
+          <a href="#home" className="flex items-center gap-3 group" data-testid="nav-logo">
             <img
               src="/logo.jpg"
               alt="SAS Energy Solutions"
               className="h-12 md:h-14 w-auto object-contain rounded-md bg-white p-0.5 shadow-sm"
               loading="eager"
             />
-            <span className="sr-only">SAS Energy Solutions — Think Future Get Benefits</span>
+            <span className="leading-tight hidden sm:block">
+              <span className={`block text-[15px] md:text-base font-bold tracking-tight ${scrolled ? "text-slate-900" : "text-white"}`}>SAS Energy Solutions</span>
+              <span className={`block text-[9px] font-medium tracking-[0.22em] uppercase ${scrolled ? "text-[#16A34A]" : "text-[#7CE39E]"}`}>Think Future · Get Benefits</span>
+            </span>
           </a>
 
           {/* Desktop nav */}
