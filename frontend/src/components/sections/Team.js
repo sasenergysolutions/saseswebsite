@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import {
-  Crown, Compass, ClipboardList, HardHat, Zap, Wrench,
+  Crown, ClipboardList, HardHat, Zap, Wrench,
   Cog, Headphones,
 } from "lucide-react";
 
@@ -10,12 +10,6 @@ const TEAM = [
     desc: "Sets the vision, engineering standards and long-term direction of SAS Energy Solutions.",
     icon: Crown,
     accent: "from-[#0A66C2] to-[#0B4B8A]",
-  },
-  {
-    role: "Solar Design Engineer",
-    desc: "Sizes systems, models shadow analysis, plans string layouts and prepares MNRE-compliant designs.",
-    icon: Compass,
-    accent: "from-[#16A34A] to-[#0E7A37]",
   },
   {
     role: "Project Engineer",
@@ -108,7 +102,7 @@ export default function Team() {
 
                 {/* Number chip */}
                 <div className="absolute top-6 right-6 text-[10px] tracking-[0.24em] uppercase font-semibold text-slate-400">
-                  {String(i + 1).padStart(2, "0")} / 08
+                  {String(i + 1).padStart(2, "0")} / 07
                 </div>
 
                 <div className="mt-6">
