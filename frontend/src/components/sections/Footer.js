@@ -1,6 +1,15 @@
 import { Facebook, Instagram, Youtube, Linkedin, ArrowUpRight } from "lucide-react";
 import { SITE, NAV } from "@/lib/site";
 
+const QUICK_LINKS = [
+  { label: "Services", href: "#services" },
+  { label: "Products", href: "#brands" },
+  { label: "Gallery", href: "#gallery" },
+  { label: "About", href: "#about" },
+  { label: "FAQ", href: "#faq" },
+  { label: "Contact", href: "#contact" },
+];
+
 const SERVICES = ["Residential", "Commercial", "Industrial", "Hybrid", "Water Pump", "AMC"];
 
 export default function Footer() {
@@ -44,7 +53,7 @@ export default function Footer() {
           <div>
             <div className="text-[10px] tracking-[0.24em] uppercase font-semibold text-white/50 mb-4">Quick Links</div>
             <ul className="space-y-2.5">
-              {NAV.map((n) => (
+              {QUICK_LINKS.map((n) => (
                 <li key={n.label}>
                   <a href={n.href} className="text-sm text-white/80 hover:text-white transition-colors">{n.label}</a>
                 </li>
@@ -83,10 +92,9 @@ export default function Footer() {
 
         <div className="mt-16 pt-6 border-t border-white/10 flex flex-col md:flex-row md:items-center md:justify-between gap-3">
           <div className="text-xs text-white/60" data-testid="footer-copyright">© 2026 SAS Energy Solutions. All Rights Reserved.</div>
-          <div className="flex items-center gap-6 text-xs text-white/50">
-            <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
-            <a href="#" className="hover:text-white transition-colors">MNRE Compliance</a>
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-xs text-white/50">
+            <a href="#" className="hover:text-white transition-colors" data-testid="footer-privacy">Privacy Policy</a>
+            <a href="#" className="hover:text-white transition-colors" data-testid="footer-terms">Terms &amp; Conditions</a>
           </div>
         </div>
       </div>

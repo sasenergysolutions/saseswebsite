@@ -13,7 +13,6 @@ import Brands from "@/components/sections/Brands";
 import Process from "@/components/sections/Process";
 import Gallery from "@/components/sections/Gallery";
 import Testimonials from "@/components/sections/Testimonials";
-import GoogleReviews from "@/components/sections/GoogleReviews";
 import Calculators from "@/components/sections/Calculators";
 import FAQ from "@/components/sections/FAQ";
 import Contact from "@/components/sections/Contact";
@@ -67,7 +66,6 @@ function App() {
         <Process />
         <Gallery />
         <Testimonials />
-        <GoogleReviews />
         <Calculators />
         <FAQ />
         <Contact />

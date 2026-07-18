@@ -2,32 +2,45 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import axios from "axios";
 import { toast } from "sonner";
-import { Phone, Mail, MapPin, MessageCircle, Send, Clock, ExternalLink } from "lucide-react";
+import { Phone, Mail, MapPin, MessageCircle, Send, Clock, ExternalLink, CheckCircle2 } from "lucide-react";
 import { SITE } from "@/lib/site";
 
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 
-const SERVICES = [
-  "Residential Solar", "Commercial Solar", "Industrial Solar",
-  "Hybrid Solar", "On-Grid", "Off-Grid", "Solar Water Pump",
-  "Solar Street Light", "AMC / Maintenance",
-];
+// Inline Google 'G' logo
+const GoogleG = ({ className = "h-4 w-4" }) => (
+  <svg viewBox="0 0 48 48" className={className} aria-hidden>
+    <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z" />
+    <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z" />
+    <path fill="#FBBC05" d="M10.53 28.59A14.5 14.5 0 0 1 9.5 24c0-1.61.27-3.16.76-4.59l-7.98-6.19A24 24 0 0 0 0 24c0 3.87.93 7.53 2.56 10.78l7.97-6.19z" />
+    <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z" />
+  </svg>
+);
 
 export default function Contact() {
-  const [form, setForm] = useState({ name: "", email: "", phone: "", service: SERVICES[0], message: "" });
+  const [form, setForm] = useState({ name: "", phone: "", email: "", location: "", message: "" });
   const [busy, setBusy] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
 
   const submit = async (e) => {
     e.preventDefault();
-    if (!form.name || !form.email || !form.phone || !form.message) {
+    if (!form.name || !form.phone || !form.location || !form.message) {
       toast.error("Please fill in all required fields.");
       return;
     }
     setBusy(true);
     try {
-      await axios.post(`${API}/contact`, form);
-      toast.success("Thanks! Our team will reach out within 24 hours.");
-      setForm({ name: "", email: "", phone: "", service: SERVICES[0], message: "" });
+      const payload = {
+        name: form.name,
+        phone: form.phone,
+        email: form.email || "noreply@sasenergysolutions.example",
+        service: form.location, // reuse existing backend field to carry location
+        message: form.message,
+      };
+      await axios.post(`${API}/contact`, payload);
+      toast.success("Enquiry sent! Our team will reach out within 24 hours.");
+      setSubmitted(true);
+      setForm({ name: "", phone: "", email: "", location: "", message: "" });
     } catch (err) {
       toast.error("Something went wrong. Please try WhatsApp instead.");
     } finally {
@@ -123,49 +136,85 @@ export default function Contact() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-10%" }}
             transition={{ duration: 0.7 }}
-            className="lg:col-span-7 rounded-3xl bg-slate-50 border border-slate-200 p-8 md:p-12"
+            className="lg:col-span-7 rounded-3xl bg-slate-50 border border-slate-200 p-8 md:p-12 relative"
             data-testid="contact-form"
           >
             <div className="text-[10px] tracking-[0.24em] uppercase font-semibold text-[#0A66C2] mb-4">Free Quote Request</div>
             <h3 className="text-2xl md:text-3xl font-semibold tracking-tight text-slate-900">Tell us about your project</h3>
 
-            <div className="mt-8 grid sm:grid-cols-2 gap-5">
-              <div>
-                <label className="text-xs font-semibold text-slate-500 uppercase tracking-widest">Full name *</label>
-                <input value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} required className="mt-2 w-full rounded-xl bg-white border border-slate-200 px-4 py-3 text-slate-900 focus:outline-none focus:border-[#0A66C2] transition-colors" data-testid="contact-name" />
-              </div>
-              <div>
-                <label className="text-xs font-semibold text-slate-500 uppercase tracking-widest">Phone *</label>
-                <input value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} required type="tel" className="mt-2 w-full rounded-xl bg-white border border-slate-200 px-4 py-3 text-slate-900 focus:outline-none focus:border-[#0A66C2] transition-colors" data-testid="contact-phone-input" />
-              </div>
-              <div className="sm:col-span-2">
-                <label className="text-xs font-semibold text-slate-500 uppercase tracking-widest">Email *</label>
-                <input value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} required type="email" className="mt-2 w-full rounded-xl bg-white border border-slate-200 px-4 py-3 text-slate-900 focus:outline-none focus:border-[#0A66C2] transition-colors" data-testid="contact-email-input" />
-              </div>
-              <div className="sm:col-span-2">
-                <label className="text-xs font-semibold text-slate-500 uppercase tracking-widest">Interested in</label>
-                <select value={form.service} onChange={(e) => setForm({ ...form, service: e.target.value })} className="mt-2 w-full rounded-xl bg-white border border-slate-200 px-4 py-3 text-slate-900 focus:outline-none focus:border-[#0A66C2]" data-testid="contact-service">
-                  {SERVICES.map((s) => <option key={s}>{s}</option>)}
-                </select>
-              </div>
-              <div className="sm:col-span-2">
-                <label className="text-xs font-semibold text-slate-500 uppercase tracking-widest">Project details *</label>
-                <textarea value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} required rows={4} className="mt-2 w-full rounded-xl bg-white border border-slate-200 px-4 py-3 text-slate-900 focus:outline-none focus:border-[#0A66C2] transition-colors resize-none" placeholder="Roof size, monthly bill, location…" data-testid="contact-message" />
-              </div>
-            </div>
-
-            <button
-              type="submit"
-              disabled={busy}
-              className="mt-8 group inline-flex items-center gap-2 rounded-full bg-slate-900 pl-6 pr-2 py-2 text-sm font-semibold text-white hover:bg-[#0A66C2] transition-colors disabled:opacity-60"
-              data-testid="contact-submit"
+            {/* Google Business CTA */}
+            <a
+              href={SITE.googleBusiness}
+              target="_blank"
+              rel="noreferrer"
+              className="mt-5 inline-flex items-center gap-2 rounded-full bg-white border border-slate-200 px-4 py-2 text-xs font-semibold text-slate-900 hover:border-slate-900 transition-colors"
+              data-testid="contact-view-google"
             >
-              {busy ? "Sending…" : "Send enquiry"}
-              <span className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-white text-slate-900">
-                <Send className="h-4 w-4" />
-              </span>
-            </button>
-            <p className="mt-4 text-xs text-slate-500">By submitting you agree to be contacted about your solar enquiry. No spam, ever.</p>
+              <GoogleG className="h-4 w-4" /> View us on Google
+            </a>
+
+            {submitted ? (
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="mt-8 rounded-2xl border border-[#16A34A]/25 bg-emerald-50 p-8 text-center"
+                data-testid="contact-success"
+              >
+                <div className="mx-auto inline-flex h-14 w-14 items-center justify-center rounded-full bg-[#16A34A] text-white">
+                  <CheckCircle2 className="h-7 w-7" />
+                </div>
+                <div className="mt-4 text-xl font-semibold tracking-tight text-slate-900">Thank you!</div>
+                <p className="mt-2 text-slate-600 max-w-md mx-auto">
+                  Your enquiry has been received. A member of the SAS Energy Solutions team will reach out within 24 hours.
+                </p>
+                <button
+                  type="button"
+                  onClick={() => setSubmitted(false)}
+                  className="mt-6 inline-flex items-center gap-2 rounded-full border border-slate-300 bg-white px-5 py-2 text-xs font-semibold text-slate-800 hover:border-slate-900 transition-colors"
+                  data-testid="contact-send-another"
+                >
+                  Send another enquiry
+                </button>
+              </motion.div>
+            ) : (
+              <>
+                <div className="mt-8 grid sm:grid-cols-2 gap-5">
+                  <div>
+                    <label className="text-xs font-semibold text-slate-500 uppercase tracking-widest">Full name *</label>
+                    <input value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} required className="mt-2 w-full rounded-xl bg-white border border-slate-200 px-4 py-3 text-slate-900 focus:outline-none focus:border-[#0A66C2] transition-colors" data-testid="contact-name" />
+                  </div>
+                  <div>
+                    <label className="text-xs font-semibold text-slate-500 uppercase tracking-widest">Phone number *</label>
+                    <input value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} required type="tel" inputMode="tel" className="mt-2 w-full rounded-xl bg-white border border-slate-200 px-4 py-3 text-slate-900 focus:outline-none focus:border-[#0A66C2] transition-colors" data-testid="contact-phone-input" />
+                  </div>
+                  <div>
+                    <label className="text-xs font-semibold text-slate-500 uppercase tracking-widest">Email <span className="text-slate-400 normal-case tracking-normal">(optional)</span></label>
+                    <input value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} type="email" className="mt-2 w-full rounded-xl bg-white border border-slate-200 px-4 py-3 text-slate-900 focus:outline-none focus:border-[#0A66C2] transition-colors" data-testid="contact-email-input" />
+                  </div>
+                  <div>
+                    <label className="text-xs font-semibold text-slate-500 uppercase tracking-widest">Location *</label>
+                    <input value={form.location} onChange={(e) => setForm({ ...form, location: e.target.value })} required placeholder="e.g. Karaikudi, Sivagangai" className="mt-2 w-full rounded-xl bg-white border border-slate-200 px-4 py-3 text-slate-900 focus:outline-none focus:border-[#0A66C2] transition-colors" data-testid="contact-location" />
+                  </div>
+                  <div className="sm:col-span-2">
+                    <label className="text-xs font-semibold text-slate-500 uppercase tracking-widest">Message *</label>
+                    <textarea value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} required rows={4} className="mt-2 w-full rounded-xl bg-white border border-slate-200 px-4 py-3 text-slate-900 focus:outline-none focus:border-[#0A66C2] transition-colors resize-none" placeholder="Roof size, monthly EB bill, timeline…" data-testid="contact-message" />
+                  </div>
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={busy}
+                  className="mt-8 group inline-flex items-center gap-2 rounded-full bg-slate-900 pl-6 pr-2 py-2 text-sm font-semibold text-white hover:bg-[#0A66C2] transition-colors disabled:opacity-60"
+                  data-testid="contact-submit"
+                >
+                  {busy ? "Sending…" : "Send enquiry"}
+                  <span className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-white text-slate-900">
+                    <Send className="h-4 w-4" />
+                  </span>
+                </button>
+                <p className="mt-4 text-xs text-slate-500">By submitting you agree to be contacted about your solar enquiry. No spam, ever.</p>
+              </>
+            )}
           </motion.form>
         </div>
       </div>

@@ -71,7 +71,7 @@ export default function Services() {
               >
                 {/* Background image (subtle) */}
                 <div className="absolute inset-0 opacity-30 group-hover:opacity-60 transition-opacity duration-700">
-                  <img src={s.img} alt="" loading="lazy" className="h-full w-full object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-110" />
+                  <img src={s.img} alt="" loading="lazy" decoding="async" className="h-full w-full object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-110" />
                 </div>
                 {/* Light wash so text stays readable */}
                 <div className="absolute inset-0 bg-gradient-to-br from-white/95 via-white/85 to-white/70 group-hover:from-white/90 group-hover:via-white/70 group-hover:to-white/40 transition-colors duration-500" />
