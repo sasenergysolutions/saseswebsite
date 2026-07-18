@@ -1,0 +1,137 @@
+{
+  "theme": "Light mode only (per requirement)",
+  "brand": {
+    "name": "SAS Energy Solutions",
+    "industry": "Solar EPC",
+    "location": "Devakottai, Tamil Nadu, India",
+    "vibe": "Premium, Minimal, Professional, Corporate, Fast, Awwwards-level, Clean Tech",
+    "inspiration": "Tesla, Apple, Tata Power Solar"
+  },
+  "colors": {
+    "primary": "#0A66C2",
+    "secondary": "#16A34A",
+    "backgrounds": {
+      "base": "#FFFFFF",
+      "surface": "#F8FAFC",
+      "surface_alt": "#F1F5F9"
+    },
+    "text": {
+      "primary": "#0F172A",
+      "secondary": "#475569",
+      "muted": "#94A3B8",
+      "inverse": "#FFFFFF"
+    },
+    "borders": "#E2E8F0"
+  },
+  "typography": {
+    "font_family": "Poppins",
+    "rules": {
+      "headings": "Tight tracking (tracking-tighter or tracking-tight). Use font-light for elegance or font-bold for impact. Never default to generic medium. Do not center everything.",
+      "overlines": "Uppercase, tiny, wide spacing (tracking-[0.2em], text-xs, font-semibold).",
+      "body": "Loose line height (leading-relaxed, text-base, text-slate-600)."
+    },
+    "scale": {
+      "h1": "text-5xl md:text-6xl lg:text-7xl tracking-tighter leading-none",
+      "h2": "text-4xl md:text-5xl lg:text-6xl tracking-tight leading-tight",
+      "h3": "text-2xl md:text-3xl tracking-tight",
+      "body": "text-base md:text-lg leading-relaxed"
+    }
+  },
+  "visual enhancers": {
+    "glassmorphism": "backdrop-blur-xl bg-white/70 border border-white/40 shadow-sm (Use for sticky header and floating elements only, optical clarity).",
+    "shadows": "Soft, diffuse ambient shadows. shadow-[0_8px_30px_rgb(0,0,0,0.04)]",
+    "borders": "1px solid #E2E8F0 for structural grids. No heavy borders."
+  },
+  "grids": {
+    "bento_tetris": "Base grid-cols-1 md:grid-cols-4 lg:grid-cols-12 gap-6 md:gap-8. Span logic for asymmetry (e.g., col-span-12 md:col-span-8 row-span-2) for Services section."
+  },
+  "layouts": {
+    "spacing": "Generous white space. p-8, p-12 for containers. py-24 to py-32 for massive vertical rhythm in sections.",
+    "alignment": "Mobile-first grids. Left-align body text, headings can be left-aligned or optical-aligned. Avoid centered symmetry disease."
+  },
+  "motion": {
+    "hero_reveal": "Kinetic typography. Framer Motion line-by-line masked reveal. Use overflow-hidden on parent lines, y: '100%' to '0%' on text children.",
+    "ken_burns": "Hero image scale from 1.0 to 1.15 over 20s ease-in-out to simulate subtle drone/camera movement.",
+    "scroll_smooth": "MANDATORY: Lenis smooth scroll for momentum.",
+    "scroll_reveal": "Framer Motion useInView for elegant fade-up + slight translation (y: 30 to 0) on scroll.",
+    "hover_states": "Micro-interactions: Slight lift (-translate-y-1), subtle shadow increase, color shift."
+  },
+  "accessibility": {
+    "contrast": "Ensure text over images has gradient overlays (bg-gradient-to-t from-black/60 to-transparent) or text-shadow.",
+    "data_testid": "All interactive elements MUST include data-testid (e.g., 'get-quote-button', 'contact-submit').",
+    "aria": "Use aria-hidden='true' for purely decorative icons."
+  },
+  "media": {
+    "image_treatment": "Premium architectural/product photography. Spotlights, clipped frames, soft edges (rounded-2xl or rounded-3xl)."
+  },
+  "3d libraries": {
+    "recommendation": "Use framer-motion for simple 3D parallax/tilt on cards. Avoid heavy WebGL unless specifically for a floating solar panel asset. Prioritize fast-loading 2D motion."
+  },
+  "image_urls": [
+    {
+      "category": "Hero Background",
+      "url": "https://images.pexels.com/photos/35726122/pexels-photo-35726122.jpeg",
+      "description": "Close-up of solar panels and a tiled roof, showcasing renewable energy solutions in architecture."
+    },
+    {
+      "category": "Commercial Packages / Gallery",
+      "url": "https://images.pexels.com/photos/29923357/pexels-photo-29923357.jpeg",
+      "description": "Aerial industrial building solar harnessing renewable energy."
+    },
+    {
+      "category": "About / Mission / Vision",
+      "url": "https://images.pexels.com/photos/30037320/pexels-photo-30037320.jpeg",
+      "description": "Aerial view of clean energy wind turbines during a vibrant sunset."
+    },
+    {
+      "category": "Residential Packages / Installation",
+      "url": "https://images.unsplash.com/photo-1770567764570-ebe9b5d0c02b?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzNzl8MHwxfHNlYXJjaHw0fHxzb2xhciUyMHBhbmVscyUyMHJvb2YlMjBtb2Rlcm4lMjBob21lfGVufDB8fHx8MTc4NDM2NjI0MHww&ixlib=rb-4.1.0&q=85",
+      "description": "A large house with solar panels on the roof."
+    }
+  ],
+  "component_name": {
+    "header": "StickyNavbar",
+    "hero": "KineticHero",
+    "stats": "AnimatedCounters",
+    "about": "NumberedManifesto",
+    "services": "BentoServices",
+    "packages": "PricingTiers",
+    "brands": "EditorialMarquee",
+    "process": "TimelineProcess",
+    "gallery": "MasonryGallery",
+    "testimonials": "GoogleCardsTestimonial",
+    "calculators": "InteractiveCalculators",
+    "contact": "ContactMapForm",
+    "footer": "MegaFooter",
+    "fabs": "FloatingActionGroup"
+  },
+  "component_path": {
+    "header": "/app/frontend/src/components/ui/StickyNavbar.js",
+    "hero": "/app/frontend/src/components/sections/KineticHero.js",
+    "services": "/app/frontend/src/components/sections/BentoServices.js",
+    "packages": "/app/frontend/src/components/sections/PricingTiers.js",
+    "calculators": "/app/frontend/src/components/sections/Calculators.js",
+    "gallery": "/app/frontend/src/components/sections/Gallery.js"
+  },
+  "instructions_to_main_agent": [
+    "Strictly adhere to the color palette: Primary #0A66C2, Secondary #16A34A.",
+    "Implement Lenis for smooth scrolling in the main layout/App wrapper.",
+    "Hero Section: Build a Kinetic typography reveal using Framer Motion (staggered children, overflow hidden) over a 20s slow-scaling Ken Burns background image. Add a 'signature on-load moment'.",
+    "Services Section: Design an asymmetrical 11-card Bento Grid using Tailwind. Create distinct span sizes to avoid boring uniform grids. Include hover micro-interactions.",
+    "Brand Marquee: Use 'react-fast-marquee'. Make it slow, editorial style. Do not use standard fast-moving colorful logos; style them clean/greyscale if possible.",
+    "Calculators: Use Shadcn UI 'Slider' and 'Card' primitives. Style them minimally and luxuriously with ample spacing.",
+    "Testimonials: Build 'Google-style' cards. Clean white backgrounds, subtle shadows, avatar, and star ratings.",
+    "All buttons must be pill-shaped or rounded-lg with clear hover states (color darken + slight lift). Use primary blue for main CTAs and secondary green for WhatsApp/success actions.",
+    "Ensure 'data-testid' is added to every interactive component."
+  ],
+  "UNIVERSAL GUIDELINES FOR MAIN AGENT": [
+    "Do not converge toward generic outputs. Use layered z-index hierarchy and premium spacing.",
+    "Never apply 'transition: all'. Use specific transitions (e.g., transition-transform, transition-colors).",
+    "Do not center-align the main App container. Respect organic and optical left alignment for text.",
+    "Use 2-3x more padding than usual (e.g., py-24 for sections). Cramped designs look cheap.",
+    "Hover states, transitions, and entrance animations are mandatory on all interactive elements. Static = dead.",
+    "Use lucide-react for icons.",
+    "Use sonner for toasts.",
+    "Never use completely transparent backgrounds under text. Always use glassmorphism or solid fills."
+  ]
+}
