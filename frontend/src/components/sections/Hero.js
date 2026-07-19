@@ -96,8 +96,8 @@ export default function Hero() {
           className="mt-8 max-w-2xl text-base md:text-lg text-white/85 leading-relaxed"
           data-testid="hero-subheadline"
         >
-          Complete residential, commercial and industrial solar solutions engineered
-          across Tamil Nadu — MNRE-standard installation, 25-year performance warranty.
+          Complete Residential, Commercial, Industrial &amp; Agricultural solar solutions.
+          Serving Devakottai, Karaikudi, Sivagangai, Pudukottai and surrounding areas.
         </motion.p>
 
         {/* CTA cluster */}
