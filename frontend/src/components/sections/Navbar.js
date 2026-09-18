@@ -10,7 +10,7 @@ import {
 import { NAV, SITE } from "@/lib/site";
 
 const ERP_URL =
-  "https://sas-solar-erp.sasenergysolution.chatgpt.site";
+  "https://erp.sases.in";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
